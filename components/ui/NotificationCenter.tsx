@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import { BellIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { BellIcon as BellIconSolid } from '@heroicons/react/24/solid'
 import { useAuth } from '@/components/providers/AuthProvider'
-import { format, formatDistanceToNow } from 'date-fns'
+import { format } from 'date-fns'
+import { formatDistanceToNow } from 'date-fns/formatDistanceToNow'
 import toast from 'react-hot-toast'
 
 interface Notification {

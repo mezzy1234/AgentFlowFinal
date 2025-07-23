@@ -1,13 +1,16 @@
 {
-  "name": "AgentFlow.AI - AI Workflow Automation",
+  "name": "AgentFlow.AI - AI Agent Marketplace",
   "short_name": "AgentFlow",
-  "description": "Automate your workflows with intelligent AI agents",
-  "theme_color": "#3b82f6",
+  "description": "Discover, create, and deploy AI agents with AgentFlow - the ultimate AI agent marketplace platform",
+  "theme_color": "#2563eb",
   "background_color": "#ffffff",
   "display": "standalone",
-  "orientation": "portrait",
-  "start_url": "/",
+  "orientation": "portrait-primary",
+  "start_url": "/?source=pwa",
   "scope": "/",
+  "categories": ["productivity", "business", "utilities"],
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/icons/icon-72x72.png",
@@ -52,7 +55,6 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["productivity", "business", "utilities"],
   "screenshots": [
     {
       "src": "/screenshots/desktop-home.png",
