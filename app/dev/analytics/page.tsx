@@ -8,8 +8,8 @@ import {
   CurrencyDollarIcon,
   UsersIcon,
   BoltIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
   CalendarIcon,
   ClockIcon,
   CheckCircleIcon,
@@ -197,9 +197,9 @@ export default function AnalyticsDashboard() {
                           analyticsData.overview.revenueGrowth >= 0 ? 'text-green-600' : 'text-red-600'
                         }`}>
                           {analyticsData.overview.revenueGrowth >= 0 ? (
-                            <TrendingUpIcon className="self-center flex-shrink-0 h-3 w-3" />
+                            <ArrowUpIcon className="self-center flex-shrink-0 h-3 w-3" />
                           ) : (
-                            <TrendingDownIcon className="self-center flex-shrink-0 h-3 w-3" />
+                            <ArrowDownIcon className="self-center flex-shrink-0 h-3 w-3" />
                           )}
                           <span className="ml-1">
                             {Math.abs(analyticsData.overview.revenueGrowth).toFixed(1)}%
@@ -231,9 +231,9 @@ export default function AnalyticsDashboard() {
                           analyticsData.overview.executionsGrowth >= 0 ? 'text-green-600' : 'text-red-600'
                         }`}>
                           {analyticsData.overview.executionsGrowth >= 0 ? (
-                            <TrendingUpIcon className="self-center flex-shrink-0 h-3 w-3" />
+                            <ArrowUpIcon className="self-center flex-shrink-0 h-3 w-3" />
                           ) : (
-                            <TrendingDownIcon className="self-center flex-shrink-0 h-3 w-3" />
+                            <ArrowDownIcon className="self-center flex-shrink-0 h-3 w-3" />
                           )}
                           <span className="ml-1">
                             {Math.abs(analyticsData.overview.executionsGrowth).toFixed(1)}%

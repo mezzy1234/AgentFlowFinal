@@ -112,7 +112,7 @@ export async function GET(request: NextRequest) {
       const avgRating = myAgents?.reduce((sum, agent) => {
         const reviews = agent.reviews || []
         if (reviews.length === 0) return sum
-        const agentAvg = reviews.reduce((s, r) => s + r.rating, 0) / reviews.length
+        const agentAvg = reviews.reduce((s: number, r: any) => s + r.rating, 0) / reviews.length
         return sum + agentAvg
       }, 0) / (myAgents?.length || 1) || 0
 

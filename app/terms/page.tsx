@@ -3,11 +3,6 @@ export default function TermsOfService() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <h1 className="text-3xl font-bold mb-8">Terms of Service</h1>
       
-      export default function TermsOfService() {
-  return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-8">Terms of Service</h1>
-      
       <div className="prose prose-gray max-w-none">
         <p className="text-sm text-gray-600 mb-8">
           Last updated: {new Date().toLocaleDateString()}
@@ -88,8 +83,6 @@ export default function TermsOfService() {
           </div>
         </section>
       </div>
-    </div>
-  )
     </div>
   )
 }

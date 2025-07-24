@@ -1,57 +1,4 @@
-export default function Integrations() {
-  const integrations = [
-    {
-      name: "Slack",
-      description: "Deploy agents directly to Slack channels",
-      logo: "🔗",
-      status: "Available"
-    },
-    {
-      name: "Discord",
-      description: "Bot integration for Discord servers",
-      logo: "🎮",
-      status: "Available"
-    },
-    {
-      name: "Zapier",
-      description: "Connect agents to 5000+ apps",
-      logo: "⚡",
-      status: "Available"
-    },
-    {
-      name: "Webhook API",
-      description: "REST API endpoints for any integration",
-      logo: "🔌",
-      status: "Available"
-    },
-    {
-      name: "WhatsApp Business",
-      description: "Customer service agents for WhatsApp",
-      logo: "💬",
-      status: "Coming Soon"
-    },
-    {
-      name: "Salesforce",
-      description: "CRM integration and automation",
-      logo: "☁️",
-      status: "Coming Soon"
-    },
-    {
-      name: "HubSpot",
-      description: "Marketing and sales automation",
-      logo: "🎯",
-      status: "Coming Soon"
-    },
-    {
-      name: "Shopify",
-      description: "E-commerce customer support",
-      logo: "🛒",
-      status: "Coming Soon"
-    }
-  ]
-
-  return (
-    'use client'
+'use client'
 
 import { useState, useMemo } from 'react'
 import { MagnifyingGlassIcon, FunnelIcon, PlusIcon, StarIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
@@ -71,8 +18,6 @@ const INTEGRATIONS = [
   { id: 11, name: 'HubSpot', category: 'CRM', description: 'Inbound marketing and sales', icon: '🎯', connected: false, featured: true, rating: 4.9, installs: '35k+' },
   { id: 12, name: 'Pipedrive', category: 'CRM', description: 'Sales pipeline management', icon: '📊', connected: true, featured: false, rating: 4.7, installs: '28k+' },
   { id: 13, name: 'Zoho CRM', category: 'CRM', description: 'Complete CRM solution', icon: '🔄', connected: false, featured: false, rating: 4.6, installs: '22k+' },
-  
-  // Marketing
   { id: 20, name: 'Mailchimp', category: 'Marketing', description: 'Email marketing automation', icon: '🐵', connected: true, featured: true, rating: 4.8, installs: '40k+' },
   { id: 21, name: 'Facebook Ads', category: 'Marketing', description: 'Social media advertising', icon: '📘', connected: false, featured: true, rating: 4.5, installs: '32k+' },
   { id: 22, name: 'Google Ads', category: 'Marketing', description: 'Search and display advertising', icon: '🎯', connected: false, featured: true, rating: 4.6, installs: '38k+' },
@@ -120,7 +65,17 @@ const generateMoreIntegrations = () => {
   ]
   
   const categories = ['Communication', 'CRM', 'Marketing', 'E-commerce', 'Productivity', 'Developer', 'Social Media', 'Finance', 'Media', 'Travel']
-  const moreIntegrations = []
+  const moreIntegrations: Array<{
+    id: number;
+    name: string;
+    category: string;
+    description: string;
+    icon: string;
+    connected: boolean;
+    featured: boolean;
+    rating: number;
+    installs: string;
+  }> = []
   
   additionalApps.forEach((app, index) => {
     const category = categories[index % categories.length]
