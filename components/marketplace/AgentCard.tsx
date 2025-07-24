@@ -267,17 +267,9 @@ export default function AgentCard({ agent, onPurchase, onLearnMore }: AgentCardP
 
         {/* Action Buttons */}
         <div className="flex gap-2">
-          {agent.demo_available && (
-            <button
-              onClick={() => onLearnMore?.(agent.id)}
-              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
-            >
-              Try Demo
-            </button>
-          )}
           <button
             onClick={() => onPurchase?.(agent.id)}
-            className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
+            className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
           >
             {agent.price_one_time && !agent.price_monthly ? 'Buy Now' : 
              agent.price_monthly && !agent.price_one_time ? 'Subscribe' : 

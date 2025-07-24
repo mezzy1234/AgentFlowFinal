@@ -4,18 +4,17 @@ import { createClient } from '@supabase/supabase-js'
 import { headers } from 'next/headers'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16',
+  apiVersion: '2024-06-20',
 })
 
-const supabaseAdmin = createClient(
+const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
 export async function POST(request: NextRequest) {
   const body = await request.text()
-  const headersList = headers()
-  const signature = headersList.get('stripe-signature')!
+  const signature = headers().get('Stripe-Signature')!
 
   let event: Stripe.Event
 

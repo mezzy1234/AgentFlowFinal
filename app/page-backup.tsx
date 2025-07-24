@@ -48,55 +48,77 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Why Choose AgentFlow?
+              Why AgentFlow.AI?
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              The most powerful and easiest way to deploy AI agents in your workflow
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              The fastest way to automate your business with pre-built AI agents
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <SparklesIcon className="w-8 h-8 text-primary-600" />
+            <div className="card p-8 text-center">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <SparklesIcon className="w-6 h-6 text-primary-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">AI-Powered</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Leverage cutting-edge AI technology to automate complex workflows
+              <h3 className="text-xl font-semibold mb-3">1000+ Integrations</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Connect Gmail, Slack, OpenAI, Stripe, and hundreds more tools instantly.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <BoltIcon className="w-8 h-8 text-primary-600" />
+            <div className="card p-8 text-center">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <BoltIcon className="w-6 h-6 text-primary-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Lightning Fast</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Deploy and scale agents in minutes, not hours
+              <h3 className="text-xl font-semibold mb-3">One-Click Setup</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Buy an agent, connect your credentials, and activate. No coding required.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <ShieldCheckIcon className="w-8 h-8 text-primary-600" />
+            <div className="card p-8 text-center">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <ShieldCheckIcon className="w-6 h-6 text-primary-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Secure</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Enterprise-grade security with full data protection
+              <h3 className="text-xl font-semibold mb-3">Enterprise Security</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Encrypted credentials, 2FA support, and GDPR compliance built-in.
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <ChartBarIcon className="w-8 h-8 text-primary-600" />
+            <div className="card p-8 text-center">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <ChartBarIcon className="w-6 h-6 text-primary-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Analytics</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Detailed insights and performance metrics for all your agents
+              <h3 className="text-xl font-semibold mb-3">Developer Revenue</h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Build once, sell forever. Earn from every agent activation and usage.
               </p>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Ready to automate everything?
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+            Join thousands of businesses already saving time with AI automation
+          </p>
+          <Link 
+            href="/signup"
+            className="btn btn-primary text-lg px-8 py-4"
+          >
+            Start Free Trial
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+              </div>
       </section>
 
       {/* Dashboard Previews Section */}
@@ -207,24 +229,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Transform Your Workflow?
-          </h2>
-          <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of businesses already using AgentFlow to automate their processes and boost productivity.
-          </p>
-          <Link 
-            href="/signup"
-            className="btn btn-primary text-lg px-8 py-4"
-          >
-            Start Free Trial
-          </Link>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -262,11 +266,6 @@ export default function HomePage() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 AgentFlow.AI. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

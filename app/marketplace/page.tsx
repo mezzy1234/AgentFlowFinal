@@ -225,19 +225,20 @@ export default function MarketplacePage() {
     setFilteredAgents(filtered)
   }, [searchTerm, selectedCategory, selectedPriceRange, sortBy])
 
-  const handlePurchase = (agent) => {
-    if (agent.required_integrations && agent.required_integrations.length > 0) {
-      setSelectedAgent(agent)
-      setShowCredentialModal(true)
-    } else {
-      // Direct purchase for agents with no integrations
-      toast.success(`Purchased ${agent.name}! Setting up your agent...`)
-    }
+  const handlePurchase = (agentId: string) => {
+    const agent = mockAgents.find(a => a.id === agentId)
+    if (!agent) return
+
+    // Redirect to Stripe checkout page
+    const checkoutUrl = `/checkout?agent=${agentId}&name=${encodeURIComponent(agent.name)}&price=${agent.price_monthly || agent.price_one_time}`
+    window.location.href = checkoutUrl
   }
 
   const handleCredentialsComplete = () => {
     setShowCredentialModal(false)
-    toast.success(`Agent activated! ${selectedAgent.name} is now running.`)
+    if (selectedAgent) {
+      toast.success(`Agent activated! ${selectedAgent.name} is now running.`)
+    }
     setSelectedAgent(null)
   }
 
@@ -400,6 +401,7 @@ export default function MarketplacePage() {
       {/* Credential Modal */}
       {showCredentialModal && selectedAgent && (
         <CredentialModal
+          isOpen={showCredentialModal}
           agent={selectedAgent}
           onComplete={handleCredentialsComplete}
           onClose={() => {
