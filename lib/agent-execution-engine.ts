@@ -263,8 +263,10 @@ export class AgentExecutionEngine {
       const encrypted = Buffer.from(parts[2], 'hex')
       
       // Decrypt
-      const decipher = crypto.createDecipherGCM(algorithm, key)
-      decipher.setAuthTag(authTag)
+      const decipher = crypto.createDecipher(algorithm, key)
+      if (authTag) {
+        decipher.setAuthTag(authTag)
+      }
       
       let decrypted = decipher.update(encrypted, undefined, 'utf8')
       decrypted += decipher.final('utf8')

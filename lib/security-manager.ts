@@ -420,7 +420,7 @@ export class SecurityManager {
    */
   cleanupRateLimits(): void {
     const now = Date.now();
-    for (const [key, data] of this.rateLimitStore.entries()) {
+    for (const [key, data] of Array.from(this.rateLimitStore.entries())) {
       if (data.resetTime <= now && (!data.blocked || data.blocked <= now)) {
         this.rateLimitStore.delete(key);
       }

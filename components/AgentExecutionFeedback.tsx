@@ -25,7 +25,8 @@ import {
   BarChart3,
   TrendingUp,
   Users,
-  Calendar
+  Calendar,
+  X
 } from 'lucide-react';
 
 // Types

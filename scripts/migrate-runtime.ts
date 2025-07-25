@@ -49,7 +49,8 @@ async function runRuntimeMigration() {
             console.log(`Statement ${i + 1} completed successfully`);
           }
         } catch (execError) {
-          console.log(`Statement ${i + 1} executed (${execError.message})`);
+          const errorMsg = execError instanceof Error ? execError.message : 'Unknown error';
+          console.log(`Statement ${i + 1} executed (${errorMsg})`);
         }
       }
     }
@@ -81,7 +82,8 @@ async function runRuntimeMigration() {
           console.log(`✅ Table ${table}: Ready`);
         }
       } catch (err) {
-        console.log(`❓ Table ${table}: ${err.message}`);
+        const errMsg = err instanceof Error ? err.message : 'Unknown error';
+        console.log(`❓ Table ${table}: ${errMsg}`);
       }
     }
     

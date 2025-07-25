@@ -731,7 +731,7 @@ async function getUserOrganizations(supabase: any, userId: string) {
   }
 
   return NextResponse.json({
-    organizations: organizations?.map(org => ({
+    organizations: organizations?.map((org: any) => ({
       ...org.organizations,
       userRole: org.role,
       joinedAt: org.joined_at
@@ -850,7 +850,7 @@ async function getWorkspaces(supabase: any, userId: string, organizationId: stri
   }
 
   return NextResponse.json({
-    workspaces: workspaces?.map(workspace => ({
+    workspaces: workspaces?.map((workspace: any) => ({
       ...workspace,
       memberCount: workspace.workspace_members?.length || 0,
       agentCount: workspace.organization_agents?.length || 0
@@ -936,8 +936,8 @@ async function getUsageAnalytics(supabase: any, userId: string, organizationId: 
   }
 
   // Calculate totals
-  const totalExecutions = usage?.reduce((sum, day) => sum + (day.total_executions || 0), 0) || 0;
-  const totalUniqueUsers = new Set(usage?.flatMap(day => day.unique_users || [])).size;
+  const totalExecutions = usage?.reduce((sum: number, day: any) => sum + (day.total_executions || 0), 0) || 0;
+  const totalUniqueUsers = new Set(usage?.flatMap((day: any) => day.unique_users || [])).size;
   const avgDailyExecutions = usage?.length > 0 ? totalExecutions / usage.length : 0;
 
   return NextResponse.json({
@@ -982,7 +982,7 @@ async function getPendingApprovals(supabase: any, userId: string, organizationId
   }
 
   // Filter approvals user can act on
-  const actionableApprovals = pendingApprovals?.filter(approval => 
+  const actionableApprovals = pendingApprovals?.filter((approval: any) => 
     approval.requested_by === userId || 
     approval.approval_workflows?.approver_roles?.includes(member.role)
   ) || [];

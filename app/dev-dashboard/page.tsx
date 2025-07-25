@@ -82,7 +82,7 @@ const mockRecentActivity = [
 ]
 
 export default function DeveloperDashboard() {
-  const { user, profile, loading } = useAuth()
+  const { user, loading } = useAuth()
   const router = useRouter()
   const [agents, setAgents] = useState(mockDeveloperAgents)
   const [recentActivity, setRecentActivity] = useState(mockRecentActivity)
@@ -94,11 +94,11 @@ export default function DeveloperDashboard() {
       return
     }
 
-    if (!loading && profile?.role !== 'developer') {
+    if (!loading && user?.role !== 'developer') {
       router.push('/customer-dashboard')
       return
     }
-  }, [user, profile, loading, router])
+  }, [user, user, loading, router])
 
   const toggleAgentPublished = async (agentId: string, currentPublished: boolean) => {
     try {
@@ -164,7 +164,7 @@ export default function DeveloperDashboard() {
                    Math.max(agents.filter(a => a.rating_count > 0).length, 1)
   }
 
-  if (loading || !profile) {
+  if (loading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>

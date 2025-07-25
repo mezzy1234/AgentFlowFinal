@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
 
     const { searchParams } = new URL(request.url);
     const dataType = searchParams.get('type');
-    const agentId = searchParams.get('agentId');
+    const agentId = searchParams.get('agentId') || undefined;
 
     switch (dataType) {
       case 'quality_metrics':
@@ -627,7 +627,7 @@ async function executeStage(stage: any, agentId: string, supabase: any) {
       success: result.success,
       executionTime: Date.now() - startTime,
       output: result.output,
-      error: result.error || null
+      error: result.success ? null : 'Stage execution failed'
     };
     
   } catch (error: any) {

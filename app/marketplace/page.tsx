@@ -158,7 +158,7 @@ export default function MarketplacePage() {
   const [selectedPriceRange, setSelectedPriceRange] = useState('')
   const [sortBy, setSortBy] = useState('featured')
   const [showFilters, setShowFilters] = useState(false)
-  const [selectedAgent, setSelectedAgent] = useState(null)
+  const [selectedAgent, setSelectedAgent] = useState<any>(null)
   const [showCredentialModal, setShowCredentialModal] = useState(false)
 
   // Filter agents based on search, category, and price
@@ -236,7 +236,7 @@ export default function MarketplacePage() {
 
   const handleCredentialsComplete = () => {
     setShowCredentialModal(false)
-    if (selectedAgent) {
+    if (selectedAgent && 'name' in selectedAgent) {
       toast.success(`Agent activated! ${selectedAgent.name} is now running.`)
     }
     setSelectedAgent(null)

@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 import { headers } from 'next/headers'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
+  apiVersion: '2023-10-16',
 })
 
 const supabase = createClient(
@@ -64,7 +64,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 
   try {
     // Create user_agents record
-    const { data: userAgent, error: userAgentError } = await supabaseAdmin
+    const { data: userAgent, error: userAgentError } = await supabase
       .from('user_agents')
       .insert({
         user_id: userId,
@@ -80,7 +80,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     if (userAgentError) throw userAgentError
 
     // Create purchase receipt
-    await supabaseAdmin
+    await supabase
       .from('purchase_receipts')
       .insert({
         user_agent_id: userAgent.id,
@@ -95,14 +95,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     const developerRevenue = session.amount_total! - platformFee
 
     // Update developer analytics
-    const { data: agent } = await supabaseAdmin
+    const { data: agent } = await supabase
       .from('agents')
       .select('developer_id')
       .eq('id', agentId)
       .single()
 
     if (agent) {
-      await supabaseAdmin
+      await supabase
         .from('developer_analytics')
         .upsert({
           developer_id: agent.developer_id,
@@ -116,7 +116,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     }
 
     // Create notifications
-    await supabaseAdmin.from('notifications').insert([
+    await supabase.from('notifications').insert([
       {
         user_id: userId,
         type: 'agent_purchased',
@@ -128,7 +128,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     ])
 
     // Update platform analytics
-    await supabaseAdmin
+    await supabase
       .from('platform_analytics')
       .upsert({
         date: new Date().toISOString().split('T')[0],
@@ -145,7 +145,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     console.error('Error handling checkout completion:', error)
     
     // Create error notification
-    await supabaseAdmin.from('notifications').insert({
+    await supabase.from('notifications').insert({
       user_id: userId,
       type: 'billing_error',
       title: 'Purchase Processing Error',
@@ -169,14 +169,14 @@ async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
     const developerRevenue = invoice.amount_paid - platformFee
 
     // Update developer analytics
-    const { data: agent } = await supabaseAdmin
+    const { data: agent } = await supabase
       .from('agents')
       .select('developer_id')
       .eq('id', agentId)
       .single()
 
     if (agent) {
-      await supabaseAdmin
+      await supabase
         .from('developer_analytics')
         .upsert({
           developer_id: agent.developer_id,
@@ -189,7 +189,7 @@ async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
     }
 
     // Update platform analytics
-    await supabaseAdmin
+    await supabase
       .from('platform_analytics')
       .upsert({
         date: new Date().toISOString().split('T')[0],
@@ -211,7 +211,7 @@ async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
 
   try {
     // Deactivate the agent
-    await supabaseAdmin
+    await supabase
       .from('user_agents')
       .update({ 
         active: false, 
@@ -222,7 +222,7 @@ async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
       .eq('agent_id', agentId)
 
     // Create notification
-    await supabaseAdmin.from('notifications').insert({
+    await supabase.from('notifications').insert({
       user_id: userId,
       type: 'subscription_cancelled',
       title: 'Subscription Cancelled',
@@ -245,7 +245,7 @@ async function handlePaymentFailed(paymentIntent: Stripe.PaymentIntent) {
   if (userId) {
     try {
       // Create billing error notification
-      await supabaseAdmin.from('notifications').insert({
+      await supabase.from('notifications').insert({
         user_id: userId,
         type: 'billing_error',
         title: 'Payment Failed',

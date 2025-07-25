@@ -1,3 +1,5 @@
+'use client'
+
 // Test Supabase Connection
 import { SimpleRuntimeManager } from '@/lib/runtime/simple-manager'
 

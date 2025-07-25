@@ -5,7 +5,7 @@ import { useAuth } from '@/components/providers/AuthProvider'
 import { useRouter } from 'next/navigation'
 
 export default function DashboardRouter() {
-  const { user, profile, loading } = useAuth()
+  const { user, loading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
@@ -14,14 +14,14 @@ export default function DashboardRouter() {
       return
     }
 
-    if (!loading && profile?.role) {
-      if (profile.role === 'customer') {
+    if (!loading && user?.role) {
+      if (user.role === 'customer') {
         router.push('/customer-dashboard')
-      } else if (profile.role === 'developer') {
+      } else if (user.role === 'developer') {
         router.push('/dev-dashboard')
       }
     }
-  }, [user, profile, loading, router])
+  }, [user, user, loading, router])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">

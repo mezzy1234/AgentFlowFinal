@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 interface AuthUser extends User {
   role?: 'customer' | 'developer' | 'admin'
   plan?: string
+  credits?: number
 }
 
 interface AuthContextType {

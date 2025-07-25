@@ -81,8 +81,8 @@ export async function GET(request: NextRequest) {
 
     const { searchParams } = new URL(request.url);
     const dataType = searchParams.get('type');
-    const agentId = searchParams.get('agentId');
-    const suiteId = searchParams.get('suiteId');
+    const agentId = searchParams.get('agentId') || undefined;
+    const suiteId = searchParams.get('suiteId') || undefined;
 
     switch (dataType) {
       case 'test_suites':
@@ -95,9 +95,15 @@ export async function GET(request: NextRequest) {
         return await getLoadTestResults(supabase, user.id, agentId);
       
       case 'test_coverage':
+        if (!agentId) {
+          return NextResponse.json({ error: 'agentId is required for test coverage' }, { status: 400 });
+        }
         return await getTestCoverage(supabase, user.id, agentId);
       
       case 'regression_reports':
+        if (!agentId) {
+          return NextResponse.json({ error: 'agentId is required for regression reports' }, { status: 400 });
+        }
         return await getRegressionReports(supabase, user.id, agentId);
       
       default:
@@ -768,13 +774,13 @@ function evaluateAssertion(assertion: any, response: Response, output: any, exec
           actual: 'unknown'
         };
     }
-  } catch (error) {
+  } catch (error: any) {
     return {
       type: assertion.type,
       passed: false,
       expected: assertion.value,
       actual: 'evaluation error',
-      error: error.message
+      error: error.message || 'Unknown error'
     };
   }
 }
@@ -829,7 +835,7 @@ async function getTestSuites(supabase: any, userId: string, agentId?: string) {
   }
 
   return NextResponse.json({
-    testSuites: testSuites?.map(suite => ({
+    testSuites: testSuites?.map((suite: any) => ({
       ...suite,
       testCaseCount: suite.test_cases?.length || 0,
       lastRunAt: suite.test_runs?.[0]?.created_at || null,
@@ -915,7 +921,7 @@ async function getTestCoverage(supabase: any, userId: string, agentId: string) {
   const coverage: Record<string, any> = {};
 
   testTypes.forEach(type => {
-    const testsOfType = testSuites?.flatMap(suite => 
+    const testsOfType = testSuites?.flatMap((suite: any) => 
       suite.test_cases?.filter((tc: any) => tc.test_type === type) || []
     ) || [];
     

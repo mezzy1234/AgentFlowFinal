@@ -456,7 +456,7 @@ export function IntegrationSettingsModal({
                 
                 {field.type === 'select' ? (
                   <select
-                    value={config[field.key] || ''}
+                    value={(config as any)[field.key] || ''}
                     onChange={(e) => updateConfig(field.key, e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
@@ -469,7 +469,7 @@ export function IntegrationSettingsModal({
                   </select>
                 ) : field.type === 'textarea' ? (
                   <textarea
-                    value={config[field.key] || ''}
+                    value={(config as any)[field.key] || ''}
                     onChange={(e) => updateConfig(field.key, e.target.value)}
                     placeholder={field.placeholder}
                     rows={3}
@@ -479,7 +479,7 @@ export function IntegrationSettingsModal({
                   <div className="relative">
                     <input
                       type={showSecrets[field.key] ? 'text' : 'password'}
-                      value={config[field.key] || ''}
+                      value={(config as any)[field.key] || ''}
                       onChange={(e) => updateConfig(field.key, e.target.value)}
                       placeholder={field.placeholder}
                       className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -495,7 +495,7 @@ export function IntegrationSettingsModal({
                 ) : (
                   <input
                     type={field.type}
-                    value={config[field.key] || ''}
+                    value={(config as any)[field.key] || ''}
                     onChange={(e) => updateConfig(field.key, e.target.value)}
                     placeholder={field.placeholder}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -779,7 +779,9 @@ export function IntegrationsDashboard() {
         last_sync: new Date(Date.now() - 5 * 60 * 1000), // 5 minutes ago
         created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
         config: {
-          workspace: 'company.slack.com'
+          custom_fields: {
+            workspace: 'company.slack.com'
+          }
         },
         metrics: {
           total_requests: 1250,

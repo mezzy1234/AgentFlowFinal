@@ -8,7 +8,7 @@ import {
   ThumbsDown,
   Flag,
   Filter,
-  Sort,
+  ArrowUpDown,
   User,
   Calendar,
   Award,
@@ -139,7 +139,7 @@ export function ReviewSystem({
         <div className="flex items-center space-x-4">
           {/* Sort */}
           <div className="flex items-center space-x-2">
-            <Sort className="h-4 w-4 text-gray-500" />
+            <ArrowUpDown className="h-4 w-4 text-gray-500" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
@@ -398,9 +398,9 @@ function ReviewCard({
       <p className="text-gray-700 mb-4 leading-relaxed">{review.comment}</p>
 
       {/* Pros & Cons */}
-      {(review.pros?.length > 0 || review.cons?.length > 0) && (
+      {((review.pros && review.pros.length > 0) || (review.cons && review.cons.length > 0)) && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          {review.pros?.length > 0 && (
+          {review.pros && review.pros.length > 0 && (
             <div>
               <h4 className="font-medium text-green-700 mb-2 flex items-center space-x-1">
                 <ThumbsUp className="h-4 w-4" />
@@ -417,7 +417,7 @@ function ReviewCard({
             </div>
           )}
           
-          {review.cons?.length > 0 && (
+          {review.cons && review.cons.length > 0 && (
             <div>
               <h4 className="font-medium text-red-700 mb-2 flex items-center space-x-1">
                 <ThumbsDown className="h-4 w-4" />

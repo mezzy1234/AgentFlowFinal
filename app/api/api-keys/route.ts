@@ -578,24 +578,4 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// Middleware function for API key authentication
-export async function authenticateAPIKey(request: NextRequest): Promise<{ valid: boolean; keyId?: string; userId?: string; error?: string }> {
-  const authHeader = request.headers.get('authorization')
-  
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return { valid: false, error: 'Missing or invalid authorization header' }
-  }
-  
-  const apiKey = authHeader.substring(7) // Remove 'Bearer ' prefix
-  const keyRecord = await apiKeyManager.validateAPIKey(apiKey)
-  
-  if (!keyRecord) {
-    return { valid: false, error: 'Invalid or expired API key' }
-  }
-  
-  return { 
-    valid: true, 
-    keyId: keyRecord.id, 
-    userId: keyRecord.user_id 
-  }
-}
+// Middleware function for API key authentication moved to /lib/api-auth.ts

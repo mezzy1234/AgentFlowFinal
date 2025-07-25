@@ -103,7 +103,7 @@ export default function ContentModerationDashboard() {
         body: JSON.stringify({
           action: 'moderate_content',
           reportId,
-          action,
+          moderationAction: action,
           resolution
         })
       });
@@ -246,7 +246,7 @@ export default function ContentModerationDashboard() {
       </div>
 
       {/* Filter Tabs */}
-      <Tabs value={filter} onValueChange={(value: any) => setFilter(value)} className="space-y-4">
+      <Tabs defaultValue={filter} className="space-y-4">
         <TabsList>
           <TabsTrigger value="all">All Reports</TabsTrigger>
           <TabsTrigger value="pending">Pending</TabsTrigger>
@@ -307,7 +307,7 @@ export default function ContentModerationDashboard() {
                       
                       <div className="flex items-center space-x-2 ml-4">
                         <Dialog>
-                          <DialogTrigger asChild>
+                          <DialogTrigger>
                             <Button
                               size="sm"
                               variant="outline"

@@ -128,7 +128,7 @@ export function IntegrationStatusDashboard() {
   };
 
   const refreshIntegration = async (integrationName: string) => {
-    setRefreshing(prev => new Set([...prev, integrationName]));
+    setRefreshing(prev => new Set([...Array.from(prev), integrationName]));
     
     try {
       const response = await fetch('/api/integrations/refresh', {
@@ -340,7 +340,9 @@ export function IntegrationStatusDashboard() {
                   {getStatusText(status.status)}
                 </span>
                 {status.status === 'connected' && status.auto_refresh_enabled && (
-                  <Zap className="h-4 w-4 text-blue-500" title="Auto-refresh enabled" />
+                  <div title="Auto-refresh enabled">
+                    <Zap className="h-4 w-4 text-blue-500" />
+                  </div>
                 )}
               </div>
 

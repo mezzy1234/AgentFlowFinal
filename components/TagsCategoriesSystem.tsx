@@ -61,6 +61,7 @@ export function CategoryCard({
   category: Category;
   selected?: boolean;
   onClick?: () => void;
+  showCount?: boolean;
 }) {
   const IconComponent = category.icon ? require('lucide-react')[category.icon] : Folder;
 

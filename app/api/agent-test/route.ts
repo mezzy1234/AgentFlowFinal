@@ -210,12 +210,13 @@ class AgentTestManager {
       }
     } catch (error) {
       // Handle execution error
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       await supabase.rpc('complete_test_execution', {
         p_execution_uuid: executionUuid,
         p_status: 'failed',
         p_duration_ms: Date.now() - startTime,
         p_error_message: 'Execution error',
-        p_error_details: JSON.stringify({ error: error.message })
+        p_error_details: JSON.stringify({ error: errorMessage })
       })
     }
   }
@@ -424,7 +425,10 @@ class AgentTestManager {
   }
 
   private validateTestResults(execution: any, validationRules: any[]) {
-    const results = { passed: true, checks: [] }
+    const results: { passed: boolean; checks: Array<{ rule: any; passed: boolean; message: string }> } = { 
+      passed: true, 
+      checks: [] 
+    }
 
     for (const rule of validationRules) {
       let checkPassed = false
@@ -463,7 +467,10 @@ class AgentTestManager {
   }
 
   private validatePerformanceResults(metrics: any, validationRules: any[]) {
-    const results = { passed: true, checks: [] }
+    const results: { passed: boolean; checks: Array<{ rule: any; passed: boolean; message: string }> } = { 
+      passed: true, 
+      checks: [] 
+    }
 
     for (const rule of validationRules) {
       let checkPassed = false

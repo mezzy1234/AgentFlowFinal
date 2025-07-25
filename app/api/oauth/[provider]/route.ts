@@ -233,7 +233,7 @@ class OAuthManager {
       
       const expiresAt = tokenData.expires_in 
         ? new Date(Date.now() + tokenData.expires_in * 1000).toISOString()
-        : null
+        : undefined
 
       return {
         success: true,
@@ -468,8 +468,12 @@ export async function GET(request: NextRequest, { params }: { params: { provider
     return NextResponse.redirect(new URL(`${redirectUrl}?success=true`, request.url))
   }
 
+  if (!userId) {
+    return NextResponse.json({ error: 'Missing user_id parameter' }, { status: 400 })
+  }
+
   // Initiate OAuth flow
-  const result = await oauthManager.initiateOAuth(userId!, params.provider, redirectAfter)
+  const result = await oauthManager.initiateOAuth(userId, params.provider, redirectAfter || undefined)
   
   if (result.error) {
     return NextResponse.json({ error: result.error }, { status: 400 })

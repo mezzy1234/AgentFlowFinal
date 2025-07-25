@@ -83,7 +83,7 @@ const mockRecentActivity = [
 ]
 
 export default function CustomerDashboard() {
-  const { user, profile, loading } = useAuth()
+  const { user, loading } = useAuth()
   const router = useRouter()
   const [userAgents, setUserAgents] = useState(mockUserAgents)
   const [recentActivity, setRecentActivity] = useState(mockRecentActivity)
@@ -94,11 +94,11 @@ export default function CustomerDashboard() {
       return
     }
 
-    if (!loading && profile?.role !== 'customer') {
+    if (!loading && user?.role !== 'customer') {
       router.push('/dev-dashboard')
       return
     }
-  }, [user, profile, loading, router])
+  }, [user, user, loading, router])
 
   const toggleAgent = async (agentId: string, currentActive: boolean) => {
     try {
@@ -140,10 +140,10 @@ export default function CustomerDashboard() {
     totalAgents: userAgents.length,
     activeAgents: userAgents.filter(ua => ua.active).length,
     totalRuns: userAgents.reduce((sum, ua) => sum + ua.run_count, 0),
-    creditsRemaining: profile?.credits || 0
+    creditsRemaining: user?.credits || 0
   }
 
-  if (loading || !profile) {
+  if (loading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
@@ -159,7 +159,7 @@ export default function CustomerDashboard() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Welcome back, {profile.email?.split('@')[0]}! 👋
+            Welcome back, {user.email?.split('@')[0]}! 👋
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
             Manage your AI agents and monitor automation performance

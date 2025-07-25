@@ -447,10 +447,16 @@ class GDPRComplianceManager {
     await supabase.from('agent_execution_logs').delete().eq('user_id', userId)
     
     // 2. Delete API keys and usage
-    await supabase.from('api_key_usage').delete().in('api_key_id', 
-      supabase.from('api_keys').select('id').eq('user_id', userId)
-    )
-    await supabase.from('api_keys').delete().eq('user_id', userId)
+    const { data: apiKeys } = await supabase
+      .from('api_keys')
+      .select('id')
+      .eq('user_id', userId);
+    
+    if (apiKeys && apiKeys.length > 0) {
+      const apiKeyIds = apiKeys.map(key => key.id);
+      await supabase.from('api_key_usage').delete().in('api_key_id', apiKeyIds);
+    }
+    await supabase.from('api_keys').delete().eq('user_id', userId);
     
     // 3. Delete user integrations (credentials)
     await supabase.from('user_integrations').delete().eq('user_id', userId)

@@ -44,7 +44,10 @@ import {
   ShieldAlert,
   ShieldX,
   Info,
-  AlertCircle as AlertCircleIcon
+  AlertCircle as AlertCircleIcon,
+  MessageSquare,
+  Mail,
+  X
 } from 'lucide-react';
 
 // Types

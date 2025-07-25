@@ -214,8 +214,8 @@ export function CredentialModal({
         <div className="flex border-b border-gray-200">
           {([
             { id: 'required', label: 'Required', count: requiredIntegrations.length },
-            { id: 'all', label: 'All Integrations' },
-            { id: 'manage', label: 'Manage' }
+            { id: 'all', label: 'All Integrations', count: undefined },
+            { id: 'manage', label: 'Manage', count: undefined }
           ] as const).map(({ id, label, count }) => (
             <button
               key={id}
@@ -402,7 +402,7 @@ function AllIntegrationsTab({
     return matchesSearch && matchesCategory;
   });
 
-  const categories = [...new Set(integrations.map(i => i.category))].sort();
+  const categories = Array.from(new Set(integrations.map(i => i.category))).sort();
 
   if (loading) {
     return (

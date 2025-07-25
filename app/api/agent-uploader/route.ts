@@ -37,7 +37,7 @@ interface UploadValidationResult {
   warnings: string[]
   metadata?: AgentMetadata
   files?: {
-    agent_json: any
+    agent_json?: any
     webhook_code?: string
     documentation?: string
     logo?: Buffer
@@ -324,8 +324,8 @@ class AgentUploadManager {
     return { valid: true, warnings }
   }
 
-  async uploadFiles(files: any, userId: string): Promise<{ [key: string]: string }> {
-    const uploadedUrls: { [key: string]: string } = {}
+  async uploadFiles(files: any, userId: string): Promise<{ [key: string]: string | string[] }> {
+    const uploadedUrls: { [key: string]: string | string[] } = {}
 
     // Upload logo if provided
     if (files.logo) {

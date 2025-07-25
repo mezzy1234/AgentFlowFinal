@@ -133,7 +133,7 @@ export interface DeviceCapabilities {
 export function MobileAppShell({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
-  const [isOnline, setIsOnline] = useState(navigator.onlineState !== false);
+  const [isOnline, setIsOnline] = useState(navigator.onLine !== false);
   const [installPrompt, setInstallPrompt] = useState<any>(null);
   
   // Detect online/offline status

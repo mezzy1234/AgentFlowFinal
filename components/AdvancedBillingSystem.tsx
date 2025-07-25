@@ -26,7 +26,7 @@ import {
   Shield,
   Bell,
   CreditCardIcon,
-  BanknotesIcon,
+  BanknoteIcon,
   ArrowUpRight,
   ArrowDownRight,
   RefreshCw,
@@ -38,7 +38,9 @@ import {
   Star,
   Crown,
   Users,
-  Building
+  Building,
+  Database,
+  Bot
 } from 'lucide-react';
 
 // Types

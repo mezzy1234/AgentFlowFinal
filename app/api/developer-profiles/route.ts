@@ -258,7 +258,7 @@ class DeveloperProfileManager {
       .in('agent_id', agents?.map(a => a.id) || [])
 
     const totalReviews = reviews?.length || 0
-    const avgRating = totalReviews > 0 ? 
+    const avgRating = totalReviews > 0 && reviews ? 
       reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews : 0
 
     const stats = {
@@ -678,7 +678,12 @@ export async function GET(request: NextRequest) {
         
         const results = await profileManager.searchDevelopers(
           query,
-          { specialization, location, min_rating: minRating, sort_by: sortBy },
+          { 
+            specialization: specialization || undefined, 
+            location: location || undefined, 
+            min_rating: minRating, 
+            sort_by: sortBy 
+          },
           searchLimit,
           searchOffset
         )

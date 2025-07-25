@@ -147,8 +147,9 @@ export class EnhancedAgentExecutionEngine {
       return run.id;
     } catch (error) {
       const latency = Date.now() - startTime;
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       if (logger!) {
-        await logger.error('Failed to queue agent run', { error: error.message }, 'init', latency);
+        await logger.error('Failed to queue agent run', { error: errorMessage }, 'init', latency);
       }
       throw error;
     }
@@ -256,17 +257,19 @@ export class EnhancedAgentExecutionEngine {
 
     } catch (error) {
       const executionTime = Date.now() - startTime;
+      const errorMsg = error instanceof Error ? error.message : 'Unknown error';
       await logger.error('Agent execution failed', {
-        error: error.message,
+        error: errorMsg,
         executionTimeMs: executionTime
       }, 'error', executionTime);
 
       // Update run as failed
+      const errorMessage2 = error instanceof Error ? error.message : 'Unknown error';
       await supabase
         .from('agent_runs')
         .update({
           status: 'failed',
-          error: error.message,
+          error: errorMessage2,
           completed_at: new Date().toISOString(),
           duration: executionTime
         })
@@ -274,7 +277,7 @@ export class EnhancedAgentExecutionEngine {
 
       result = {
         success: false,
-        error: error.message,
+        error: errorMessage2,
         executionTimeMs: executionTime,
         retryCount: 0,
         healthImpact: 'negative'
@@ -517,7 +520,7 @@ export class EnhancedAgentExecutionEngine {
   async emergencyStop(): Promise<void> {
     console.warn('Emergency stop triggered - stopping all running jobs');
     
-    for (const [runId] of this.runningJobs) {
+    for (const [runId] of Array.from(this.runningJobs)) {
       await supabase
         .from('agent_runs')
         .update({

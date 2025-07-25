@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
-import { AlertTriangle, Activity, Server, Memory, Cpu, Clock, Users, AlertCircle, PlayCircle, PauseCircle, StopCircle, RefreshCw } from 'lucide-react';
+import { AlertTriangle, Activity, Server, HardDrive, Cpu, Clock, Users, AlertCircle, PlayCircle, PauseCircle, StopCircle, RefreshCw } from 'lucide-react';
 
 interface RuntimeStatus {
   organizationId: string;
@@ -279,7 +279,7 @@ export function RuntimeDashboard() {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
-              <Memory className="h-8 w-8 text-purple-600" />
+              <HardDrive className="h-8 w-8 text-purple-600" />
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Memory Usage</p>
                 <p className="text-2xl font-bold text-gray-900">{formatMemory(metrics.memoryUtilization)}</p>
@@ -314,7 +314,7 @@ export function RuntimeDashboard() {
       </div>
 
       {/* Detailed Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+      <Tabs defaultValue={activeTab} className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="overview">Runtime Overview</TabsTrigger>
           <TabsTrigger value="containers">Container Status</TabsTrigger>
